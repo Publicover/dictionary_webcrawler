@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'mechanize'
 
+start_time = Time.now
 agent = Mechanize.new
 BASE_URL = 'http://en.wikipedia.org'.freeze
 agent.history_added = Proc.new { sleep 0.5 }
@@ -24,7 +25,7 @@ loop do
   else
     # page_titles << next_page.parser.css('h1').text
     # page_titles << "GOT IT"
-    puts "GOT IT"
+    puts "GOT IT in #{Time.now - start_time}"
     break
   end
 end

@@ -10,19 +10,20 @@ BASE_URL = 'http://johnsonsdictionaryonline.com'.freeze
 page = agent.get("#{BASE_URL}/?page_id=50&whichLetter=Q")#.search('//*[@id="storycontent"]/div')
 # link_table = page.links.find_all { |link| link.attributes.parent.name == 'td' }
 # link_table = page.parser.css('//*[@id="storycontent"]/div/center[2]/table/tbody/tr/td')
-node = page.css('table')
+# node = page.links_with(xpath: '//*[@id="storycontent"]/div/center[2]/table/tbody/tr/td[1]/a')
 
 definitions = []
 
-node.links.each do |link|
-  # next_page = link.click
-  # if next_page.parser.css('//*[@id="storycontent"]/div').css('style')
-  #   definitions << "NOPE DIDN'T WORK"
-  # # elsif next_page.parser.css('')
-  #   # definitions << "DEAD URL"
-  # else
-  #   definitions << next_page.parser.css('//*[@id="storycontent"]/div').text
-  # end
+page.links_with(css: '//*[@id="storycontent"]/div').each do |link|
+# # node.each do |link|
+#   next_page = link.click
+#   if next_page.parser.css('//*[@id="storycontent"]/div').css('style')
+#     definitions << "NOPE DIDN'T WORK"
+#   # elsif next_page.parser.css('')
+#     # definitions << "DEAD URL"
+#   else
+#     definitions << next_page.parser.css('//*[@id="storycontent"]/div').text
+#   end
   puts link.text
 end
 
@@ -34,6 +35,10 @@ end
 # end
 # definitions << next_page.parser.css('//*[@id="storycontent"]/div').text
 
-definitions.each do |definition|
-  puts definition
-end
+# if definitions.empty?
+#   puts "EMPTY LIST OF WORDS"
+# else
+  definitions.each do |definition|
+    puts definition
+  end
+# end
