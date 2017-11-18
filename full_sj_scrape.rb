@@ -53,5 +53,5 @@ LETTERS.each do |letter|
 #   text_file.close
 end
 
-# puts "MADE IT! It took #{Time.now - start_time}."
-puts links
+puts "MADE IT! It took #{Time.now - start_time}."
+# puts links
