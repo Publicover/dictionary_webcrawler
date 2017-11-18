@@ -13,15 +13,13 @@ http_interactions:
       - "*/*"
       User-Agent:
       - Ruby
-      Host:
-      - johnsonsdictionaryonline.com
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Sat, 18 Nov 2017 14:37:44 GMT
+      - Sat, 18 Nov 2017 14:37:45 GMT
       Server:
       - Apache
       X-Powered-By:
@@ -324,5 +322,5 @@ http_interactions:
         of external sites linked to it, and has no warranty or guarantee concerning
         accuracy or availability.</font></div>\r\r\n\r\n</body>\r\r\n</html>\r\n</body>\r\r\n</html>"
     http_version: 
-  recorded_at: Sat, 18 Nov 2017 14:37:44 GMT
+  recorded_at: Sat, 18 Nov 2017 14:37:45 GMT
 recorded_with: VCR 3.0.3

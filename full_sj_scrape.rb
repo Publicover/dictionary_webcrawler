@@ -15,7 +15,6 @@ LETTERS.each do |letter|
   agent = Mechanize.new
   mech_page = agent.get("#{BASE_URL}/?page_id=50&whichLetter=#{letter}")
   definitions = Hash.new('Not found')
-  hrefs = []
   links = []
 
   # linkset = parse_page.xpath('//a/@href')

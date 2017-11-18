@@ -13,8 +13,6 @@ http_interactions:
       - "*/*"
       User-Agent:
       - Ruby
-      Host:
-      - johnsonsdictionaryonline.com
   response:
     status:
       code: 200

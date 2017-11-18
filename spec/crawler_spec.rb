@@ -4,8 +4,15 @@ require 'mechanize'
 require 'httparty'
 
 RSpec.describe 'Web crawler' do
-  let(:page) { HTTParty.get('http://johnsonsdictionaryonline.com') }
+  let(:page) {
+    HTTParty.get('http://johnsonsdictionaryonline.com/?page_id=50&whichLetter=Q')
+  }
   let(:parse_page) { Nokogiri::HTML(page) }
+  let(:agent) { Mechanize.new }
+  let(:mech_page) {
+    agent.get('http://johnsonsdictionaryonline.com/?page_id=50&whichLetter=Q')
+  }
+  let(:definitions) { Hash.new('Not found') }
 
   it 'should be true' do
     the_truth = true
@@ -19,16 +26,29 @@ RSpec.describe 'Web crawler' do
     end
   end
 
-  it 'should return page title' do
-    VCR.use_cassette('get_title') do
+  it 'should return text of HTML element' do
+    VCR.use_cassette('title') do
       title = parse_page.xpath('//title').text
       expect(title).to eq(
-        ' - A Dictionary of the English Language - Samuel Johnson - 1755'
+        ' » Alphabetical List of Entries - A Dictionary of the English Language - Samuel Johnson - 1755'
       )
     end
   end
 
-  it 'should return links' do
-    
+  it 'should allow mechanize' do
+    VCR.use_cassette('use_mechanize') do
+      expect(mech_page).to be_truthy
+    end
+  end
+
+  it 'should store definitions with default value' do
+    expect(definitions['flunk']).to eq('Not found')
+  end
+
+  it 'should store links from table data' do
+    VCR.use_cassette('get_links') do
+      links = parse_page.xpath('//td/a')
+      expect(links).not_to be_empty
+    end
   end
 end
